@@ -17,13 +17,38 @@ class DiaDia(io:IO) {
         do {
             istruzione=console.leggiRiga()
             comandoCostruito = fabbrica.costruisciComando(istruzione)
-        }while (!processaIstruzione(comandoCostruito, io) && !partita.isFinita())
+        }while (!processaIstruzione(comandoCostruito, console) && !partita.isFinita())
         if (partita.getPlayer().getCfu() == 0) {
             console.mostraMessaggio("\nOh no hai perso mi dispiace")
         }
         console.mostraMessaggio("Grazie di aver giocato!")
     }
+    private fun processaIstruzione(Comando:AbstractComando?,console:IOConsole):Boolean {
+        val stampa = comandoCostruito?.esegui(partita)
+        when (stampa) {
+            "Che attrezzo vuoi posare?" -> {
+                return CambioParametro(console, stampa)
+            }
 
+            "Che attrezzo vuoi prendere?" -> {
+                return CambioParametro(console, stampa)
+            }
+
+            "Dove vuoi andare?" -> {
+                return CambioParametro(console, stampa)
+            }
+            "Su cosa vuoi avere le informazioni?"->{
+                return CambioParametro(console, stampa)
+            }
+            "Grazie di aver giocato!" -> return true
+        }
+        if (partita.vinta()) {
+            io.mostraMessaggio("WOW HAI VINTO!")
+            return true
+        }
+            return false
+
+    }
     companion object {
         private const val MessaggioDiBenvenuto="Ti trovi nell'Universita', ma oggi e' diversa dal solito\n" +
                 "Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\\\n" +
@@ -36,3 +61,13 @@ class DiaDia(io:IO) {
                 "Per conoscere le istruzioni usa il comando 'aiuto'"
     }
 }
+
+    private fun CambioParametro(console: IOConsole,stampa:String): Boolean {
+        var parametro: String?
+        do {
+            console.mostraMessaggio(stampa)
+            parametro = console.leggiRiga()
+        } while (parametro.isNullOrEmpty())
+        comandoCostruito.setParametro(parametro)
+        return false
+    }
