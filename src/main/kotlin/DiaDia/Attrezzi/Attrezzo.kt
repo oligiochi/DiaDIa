@@ -2,7 +2,7 @@ package DiaDia.Attrezzi
 
 import java.util.*
 
-class Attrezzo(val nome:String,val peso:Int) : Comparable<Attrezzo> {
+class Attrezzo(private val nome:String,private val peso:Int) : Comparable<Attrezzo> {
     override fun compareTo(other: Attrezzo): Int {
         return this.nome.compareTo(other.nome)
     }
@@ -20,5 +20,6 @@ class Attrezzo(val nome:String,val peso:Int) : Comparable<Attrezzo> {
     override fun toString(): String {
         return "$nome ($peso Kg)"
     }
-
+    fun getNome()=nome
+    fun getPeso()=peso
 }

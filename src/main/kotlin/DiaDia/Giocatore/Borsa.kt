@@ -3,7 +3,7 @@ package DiaDia.Giocatore
 import DiaDia.Attrezzi.Attrezzo
 import DiaDia.Attrezzi.ComparatorPerPeso
 
-class Borsa(val pesoMax: Int){
+class Borsa(private val pesoMax: Int){
     private val attrezzi : MutableList<Attrezzo> = mutableListOf()
     private var peso=0
     companion object {
@@ -15,11 +15,12 @@ class Borsa(val pesoMax: Int){
     fun getContenutoOrdinatoPerNome()=this.attrezzi.sort()
     fun getContenutoOrdinatoPerPeso()=this.attrezzi.sortWith(ComparatorPerPeso())
     fun hasAttrezzi(attrezzo:String)=this.attrezzi.contains(this.getAttrezzo(attrezzo))
+    fun getpesoMax()=pesoMax
     fun addAttrezzo(attrezzo: Attrezzo):Boolean{
-        if(this.getPeso()+attrezzo.peso>this.pesoMax) {
+        if(this.getPeso()+attrezzo.getPeso()>this.pesoMax) {
             return false
         }
-        this.peso=this.getPeso()+attrezzo.peso
+        this.peso=this.getPeso()+attrezzo.getPeso()
         return this.attrezzi.add(attrezzo)
     }
     fun getAttrezzo(attrezzo:String): Attrezzo? {
@@ -37,7 +38,7 @@ class Borsa(val pesoMax: Int){
 
     override fun toString(): String {
         if(!ifEmpty())
-        return "Contenuto borsa ($pesoMax Kg/$peso Kg): attrezzi=$attrezzi"
+        return "Contenuto borsa ($peso Kg/$pesoMax Kg): attrezzi=$attrezzi"
         return "Borsa Vuota"
     }
 

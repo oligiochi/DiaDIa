@@ -1,7 +1,7 @@
 package DiaDia
 
 class DiaDia(io:IO) {
-    private val partita: Partita
+   /* private val partita: Partita
     private val console: IOConsole
     private val fabbrica: FabbricaDiComandi
 
@@ -60,7 +60,6 @@ class DiaDia(io:IO) {
                 "in fondo alla stanza vedi una lanterna il suo peso è 3kg.\n" +
                 "Per conoscere le istruzioni usa il comando 'aiuto'"
     }
-}
 
     private fun CambioParametro(console: IOConsole,stampa:String): Boolean {
         var parametro: String?
@@ -70,4 +69,6 @@ class DiaDia(io:IO) {
         } while (parametro.isNullOrEmpty())
         comandoCostruito.setParametro(parametro)
         return false
-    }
+    }*/
+}
+
